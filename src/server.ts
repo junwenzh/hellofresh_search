@@ -10,7 +10,7 @@ app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 
-app.use('/api', getRecipesRoute, (req, res) => {
+app.use('/api', (req, res) => {
   res.send('hello');
 });
 
