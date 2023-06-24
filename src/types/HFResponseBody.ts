@@ -1,16 +1,31 @@
 export type Item = {
-  averageRating: number;
-  category: { name: string };
-  difficulty: number;
-  favoritesCount: number;
   id: string;
-  ingredients: { name: string }[];
   name: string;
-  nutrition: { name: string; amount: number }[];
+  websiteUrl: string;
+  imagePath: string;
+  headline: string;
+  description: string;
+  category: { name: string };
+  cuisines: { name: string }[];
+  difficulty: number;
+  nutrition: { name: string; amount: number; unit: string }[];
   prepTime: string;
-  ratingsCount: number;
   totalTime: string;
-  steps: { index: number; instructions: string }[];
+  favoritesCount: number;
+  ratingsCount: number;
+  averageRating: number;
+  ingredients: {
+    id: string;
+    name: string;
+    imagePath: string;
+    family: { id: string; name: string };
+  }[];
+  yields: {
+    yields: number;
+    ingredients: { id: string; amount: number; unit: string }[];
+  }[];
+  steps: { index: number; ingredients: string[]; instructions: string }[];
+  tags: { name: string }[];
 };
 
 export type ResponseBody = {

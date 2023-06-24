@@ -1,14 +1,11 @@
 import { Router, NextFunction, Request, Response } from 'express';
-import hellofreshController from '../controllers/recipesController';
+import recipesController from '../controllers/recipesController';
 
 const router = Router();
 
-router.get(
-  '/',
-  hellofreshController.getRecipes,
-  (req: Request, res: Response) => {
-    res.end();
-  }
-);
+router.post('/findmatches', recipesController.getRecipes, (req, res) => {
+  console.log(res.locals);
+  return res.status(200).json(res.locals.rows);
+});
 
 export default router;

@@ -1,14 +1,15 @@
-GET http://localhost:3000/hfapi/token HTTP/1.1
-
-###
-
 POST http://localhost:3000/hfapi/token HTTP/1.1
 
 ###
 
-POST http://localhost:3000/hfapi/findmatches HTTP/1.1
+POST http://localhost:3000/hfapi/getall HTTP/1.1
+
+
+###
+
+POST http://localhost:3000/dbapi/findmatches HTTP/1.1
 content-type: application/json
 
 {
-    "ingredients": ["Shrimp"]
+    "ingredients": ["Creamy Chicken and Wild Rice Soup","Garlic Bread"]
 }

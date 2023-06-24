@@ -18,7 +18,7 @@ app.get('/', (req, res) =>
 
 app.use('/', express.static(path.join(__dirname, '../dist')));
 
-app.use('/api', getRecipesRoute);
+app.use('/dbapi', getRecipesRoute);
 
 app.use('/hfapi', hellofreshRoute);
 
@@ -29,7 +29,7 @@ app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     message: { err: 'An error occurred' },
   };
   const errorObj = Object.assign({}, defaultErr, err);
-  console.log(errorObj.log);
+  console.log(errorObj.message.err);
   return res.status(errorObj.status).json(errorObj.message);
 });
 

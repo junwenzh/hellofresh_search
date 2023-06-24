@@ -1,17 +1,11 @@
 import { NextFunction, Request, Response } from 'express';
 import recipeModel from '../models/recipeModel';
 
-const recipesController: { [key: string]: any } = {};
+const getRecipes = async (req: Request, res: Response, next: NextFunction) => {
+  const ingredients = req.body.ingredients;
 
-recipesController.getRecipes = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
-  const ingredients = req.body.ingredients as string[];
-  console.log(req.body);
-
-  if (!ingredients) return next({ message: { err: 'No ingredients' } });
+  if (!ingredients || !Array.isArray(ingredients))
+    return next({ message: { err: 'No ingredients supplied' } });
 
   let sqlIn = '';
 
@@ -26,15 +20,18 @@ recipesController.getRecipes = async (
     from    ingredients i
     join    recipe_ingredients ri on i.id = ri.ingredient_id
     join    recipes r on ri.recipe_id = r.id
-    where   i.name in (${sqlIn})
+    where   i.name in (${sqlIn}) and i.pantry = FALSE
     group by r.id
-    having  r.ingredients = count(*);`;
+    having  r.totalingredients = count(*);`;
 
   const results: any = await recipeModel.rawSql?.(sql, []);
 
   res.locals.count = results.rowCount;
-  res.locals.recipes = results.rows;
+  res.locals.recipes = results.rows.map((e: { id: string }) => e.id);
+
   return next();
 };
 
-export default recipesController;
+export default {
+  getRecipes,
+};

@@ -5,21 +5,21 @@ export default class Recipe {
 
   name: string;
 
-  category: string | null;
+  category: string;
 
-  difficulty: number | null;
+  difficulty: number;
 
-  calories: number | null;
+  calories: number;
 
-  prepTime: number | null;
+  prepTime: number;
 
-  totalTime: number | null;
+  totalTime: number;
 
-  favoritesCount: number | null;
+  favoritesCount: number;
 
-  ratingsCount: number | null;
+  ratingsCount: number;
 
-  averageRating: number | null;
+  averageRating: number;
 
   ingredients: { name: string }[];
 
@@ -28,14 +28,14 @@ export default class Recipe {
   constructor(
     id: string,
     name: string,
-    category: string | null,
-    difficulty: number | null,
-    nutrition: { name: string; amount: number }[],
-    prepTime: string | null,
-    totalTime: string | null,
-    favoritesCount: number | null,
-    ratingsCount: number | null,
-    averageRating: number | null,
+    category: string,
+    difficulty: number,
+    nutrition: number,
+    prepTime: string,
+    totalTime: string,
+    favoritesCount: number,
+    ratingsCount: number,
+    averageRating: number,
     ingredients: { name: string }[],
     steps: { index: number; instructions: string }[]
   ) {
@@ -43,7 +43,7 @@ export default class Recipe {
     this.name = name;
     this.category = category;
     this.difficulty = difficulty;
-    this.calories = nutrition[0]?.amount;
+    this.calories = nutrition;
     this.prepTime = moment.duration(prepTime).asMinutes();
     this.totalTime = moment.duration(totalTime).asMinutes();
     this.favoritesCount = favoritesCount;

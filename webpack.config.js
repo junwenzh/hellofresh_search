@@ -18,13 +18,12 @@ module.exports = {
         test: /\.[jt]sx?$/,
         loader: 'esbuild-loader',
         options: {
-          // JavaScript version to compile to
           target: 'es2015',
         },
       },
       {
-        test: /.scss$/,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
+        test: /.s?[ac]ss$/,
+        use: ['style-loader', 'css-loader'],
       },
     ],
   },
