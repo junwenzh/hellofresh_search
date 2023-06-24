@@ -4,18 +4,20 @@ import Recipe from '../classes/Recipe';
 type DbRecipe = [
   id: string,
   name: string,
-  category: string,
-  difficulty: number,
-  calories: number,
-  preptime: number,
-  totaltime: number,
-  ratingscount: number,
-  averagerating: number
+  category: string | null,
+  difficulty: number | null,
+  calories: number | null,
+  preptime: number | null,
+  totaltime: number | null,
+  ratingscount: number | null,
+  averagerating: number | null
 ];
 
 type DbIngredient = [id: number, name: string];
 
 type DbRecipeIngredient = [recipe_id: string, ingredient_id: number];
+
+type DbSteps = [recipe_id: string, index: number, instructions: string];
 
 const pool = new Pool({
   host: 'localhost',
@@ -35,6 +37,11 @@ const recipeModel: {
     recipeId: string,
     ingredientId: number
   ) => Promise<string>;
+  insertSteps?: (
+    recipeId: string,
+    step: number,
+    description: string
+  ) => Promise<string>;
 } = {};
 
 recipeModel.rawSql = async (sql, params): Promise<QueryResult<any>> => {
@@ -46,7 +53,7 @@ recipeModel.rawSql = async (sql, params): Promise<QueryResult<any>> => {
 
 // take a Recipe object and insert into recipe table
 recipeModel.insertRecipe = async recipe => {
-  const sql = 'insert into recipe values ($1, $2, $3, $4, $5, $6, $7, $8, $9)';
+  const sql = 'insert into recipes values ($1, $2, $3, $4, $5, $6, $7, $8, $9)';
   const params: DbRecipe = [
     recipe.id,
     recipe.name,
@@ -72,6 +79,12 @@ recipeModel.insertRecipeIngredients = async (recipeId, ingredientId) => {
   return query(sql, params);
 };
 
+recipeModel.insertSteps = async (recipeId, index, instructions) => {
+  const sql = 'insert into recipe_steps values ($1, $2, $3)';
+  const params: DbSteps = [recipeId, index, instructions];
+  return query(sql, params);
+};
+
 async function query(sql: string, params: any[]) {
   const client = await pool.connect();
   try {
@@ -80,6 +93,7 @@ async function query(sql: string, params: any[]) {
     return 'Success';
   } catch (e) {
     client.release();
+    console.log(e);
     return 'Failed';
   }
 }

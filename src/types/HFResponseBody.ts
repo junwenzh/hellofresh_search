@@ -10,7 +10,7 @@ export type Item = {
   prepTime: string;
   ratingsCount: number;
   totalTime: string;
-  // steps: {index: number, instructions: string}[],
+  steps: { index: number; instructions: string }[];
 };
 
 export type ResponseBody = {
