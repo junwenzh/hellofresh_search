@@ -9,12 +9,20 @@ const pool = new Pool({
   max: 10,
 });
 
-export default async function (
+const recipeModel: { [key: string]: any } = {};
+
+recipeModel.query = async (
   sql: string,
   params: any[]
-): Promise<QueryResult<any>> {
+): Promise<QueryResult<any>> => {
   const client = await pool.connect();
   const results = await client.query(sql, params);
   client.release();
   return results;
-}
+};
+
+recipeModel.insertRecipe = async () => {};
+recipeModel.insertIngredient = async () => {};
+recipeModel.insertRecipeIngredients = async () => {};
+
+export default recipeModel;

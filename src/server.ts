@@ -1,8 +1,10 @@
+import path from 'path';
 import express, { NextFunction, Request, Response } from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 
 import getRecipesRoute from './routes/recipesRoute';
+import hellofreshRoute from './routes/hellofreshRoute';
 
 const app = express();
 
@@ -10,9 +12,17 @@ app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 
+app.get('/', (req, res) =>
+  res.status(200).sendFile(path.join(__dirname, '../dist/index.html'))
+);
+
+app.use('/', express.static(path.join(__dirname, '../dist')));
+
 app.use('/api', (req, res) => {
   res.send('hello');
 });
+
+app.use('/hfapi', hellofreshRoute);
 
 app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
   const defaultErr = {

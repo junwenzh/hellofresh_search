@@ -2,7 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: './client/index.tsx',
+  entry: ['./src/view/index.tsx'],
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
@@ -10,7 +10,7 @@ module.exports = {
   },
   mode: process.env.NODE_ENV,
   resolve: {
-    extensions: ['.tsx', '.ts', '.js', 'jsx'],
+    extensions: ['.tsx', '.ts', '.js', '.jsx'],
   },
   module: {
     rules: [
@@ -30,8 +30,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      // filename: './index.html',
-      template: './client/index.html',
+      template: './src/view/index.html',
     }),
   ],
   devServer: {
