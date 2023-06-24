@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import query from '../models/recipeModel';
+import recipeModel from '../models/recipeModel';
 
 const recipesController: { [key: string]: any } = {};
 
@@ -9,8 +9,8 @@ recipesController.getRecipes = async (
   next: NextFunction
 ) => {
   const sql = 'select * from recipes;';
-  // const results: any = await query(sql, []);
-  console.log(1);
+  const results: any = await recipeModel.rawSql?.(sql, []);
+  console.log('results:', results);
   return next();
 };
 

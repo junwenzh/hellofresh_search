@@ -18,9 +18,7 @@ app.get('/', (req, res) =>
 
 app.use('/', express.static(path.join(__dirname, '../dist')));
 
-app.use('/api', (req, res) => {
-  res.send('hello');
-});
+app.use('/api', getRecipesRoute);
 
 app.use('/hfapi', hellofreshRoute);
 
