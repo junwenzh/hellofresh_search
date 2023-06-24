@@ -43,3 +43,28 @@ export type DbRecipeStep = [
 export type DbRecipeCuisine = [recipe_id: string, cuisine: string];
 
 export type DbRecipeTag = [recipe_id: string, tag: string];
+
+export type QueryResultRecipe = {
+  id: string;
+  name: string;
+  websiteurl: string;
+  imagepath: string;
+  headline: string;
+  description: string;
+  category: string;
+  difficulty: number;
+  calories: number;
+  preptime: string;
+  totaltime: string;
+  favoritescount: number;
+  averagerating: number;
+  cuisines: string[];
+  ingredients: {
+    name: string;
+    imagePath: string;
+    amount: number;
+    unit: string;
+  }[];
+  steps: { step: number; ingredients: string; instructions: string }[];
+  tags: string[];
+};

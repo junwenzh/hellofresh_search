@@ -1,55 +1,23 @@
-import moment from 'moment';
-
 export default class Recipe {
-  id: string;
-
-  name: string;
-
-  category: string;
-
-  difficulty: number;
-
-  calories: number;
-
-  prepTime: number;
-
-  totalTime: number;
-
-  favoritesCount: number;
-
-  ratingsCount: number;
-
-  averageRating: number;
-
-  ingredients: { name: string }[];
-
-  steps: { index: number; instructions: string }[];
-
   constructor(
-    id: string,
-    name: string,
-    category: string,
-    difficulty: number,
-    nutrition: number,
-    prepTime: string,
-    totalTime: string,
-    favoritesCount: number,
-    ratingsCount: number,
-    averageRating: number,
-    ingredients: { name: string }[],
-    steps: { index: number; instructions: string }[]
-  ) {
-    this.id = id;
-    this.name = name;
-    this.category = category;
-    this.difficulty = difficulty;
-    this.calories = nutrition;
-    this.prepTime = moment.duration(prepTime).asMinutes();
-    this.totalTime = moment.duration(totalTime).asMinutes();
-    this.favoritesCount = favoritesCount;
-    this.ratingsCount = ratingsCount;
-    this.averageRating = averageRating;
-    this.ingredients = ingredients;
-    this.steps = steps;
-  }
+    public name: string,
+    public imagePath: string,
+    public websiteUrl: string,
+    public headline: string,
+    public description: string,
+    public category: string,
+    public cuisines: string[],
+    public tags: string[],
+    public difficulty: number,
+    public calories: number,
+    public prepTime: number,
+    public totalTime: number,
+    public ingredients: {
+      name: string;
+      imagePath: string;
+      amount: number;
+      unit: string;
+    }[],
+    public steps: { step: number; ingredients: string; instructions: string }[]
+  ) {}
 }

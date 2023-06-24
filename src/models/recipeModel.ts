@@ -65,12 +65,40 @@ const insertRecipeTag = async (params: DbRecipeTag) => {
   return query(sql, params);
 };
 
+const queryCuisines = async (id: string) => {
+  const sql =
+    'select cuisine from recipe_cuisines where recipe_id = $1 order by cuisine';
+  return query(sql, [id]);
+};
+
+const queryTags = async (id: string) => {
+  const sql = 'select tag from recipe_tags where recipe_id = $1 order by tag';
+  return query(sql, [id]);
+};
+
+const queryIngredients = async (id: string) => {
+  const sql = `
+    select  b.name, b.imagepath, c.amount, c.unit
+    from    recipe_ingredients a
+    join    ingredients b on a.ingredient_id = b.id
+    left join recipe_yields c on a.recipe_id = c.recipe_id and a.ingredient_id = c.ingredient_id
+    where   a.recipe_id = $1;
+  `;
+  return query(sql, [id]);
+};
+
+const querySteps = async (id: string) => {
+  const sql =
+    'select step, ingredients, instructions from recipe_steps where recipe_id = $1 order by step';
+  return query(sql, [id]);
+};
+
 async function query(sql: string, params: any[]) {
   const client = await pool.connect();
   try {
-    await client.query(sql, params);
+    const results = await client.query(sql, params);
     client.release();
-    return 'Success';
+    return results;
   } catch (e) {
     client.release();
     console.log(e);
@@ -87,4 +115,8 @@ export default {
   insertRecipeStep,
   insertRecipeCuisine,
   insertRecipeTag,
+  queryCuisines,
+  queryIngredients,
+  querySteps,
+  queryTags,
 };

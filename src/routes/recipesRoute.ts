@@ -3,9 +3,14 @@ import recipesController from '../controllers/recipesController';
 
 const router = Router();
 
-router.post('/findmatches', recipesController.getRecipes, (req, res) => {
-  console.log(res.locals);
-  return res.status(200).json(res.locals.rows);
-});
+router.post(
+  '/findmatches',
+  recipesController.getRecipes,
+  recipesController.getAdditionalData,
+  (req, res) => {
+    console.log(res.locals);
+    return res.status(200).json(res.locals.rows);
+  }
+);
 
 export default router;
