@@ -8,8 +8,7 @@ router.post(
   recipesController.getRecipes,
   recipesController.getAdditionalData,
   (req, res) => {
-    console.log(res.locals);
-    return res.status(200).json(res.locals.rows);
+    return res.status(200).json(res.locals.recipes);
   }
 );
 
