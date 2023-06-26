@@ -12,4 +12,13 @@ router.post(
   }
 );
 
+router.get(
+  '/allingredients',
+  recipesController.getAllIngredients,
+  (req, res) => {
+    // console.log(res.locals.allIngredients);
+    return res.status(200).json(res.locals.allIngredients);
+  }
+);
+
 export default router;

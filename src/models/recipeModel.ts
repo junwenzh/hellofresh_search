@@ -93,6 +93,15 @@ const querySteps = async (id: string) => {
   return query(sql, [id]);
 };
 
+const queryAllIngredients = async () => {
+  const sql = `
+    select  distinct name
+    from    ingredients
+    order by name
+  `;
+  return query(sql, []);
+};
+
 async function query(sql: string, params: any[]) {
   const client = await pool.connect();
   try {
@@ -119,4 +128,5 @@ export default {
   queryIngredients,
   querySteps,
   queryTags,
+  queryAllIngredients,
 };

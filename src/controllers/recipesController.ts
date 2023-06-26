@@ -3,7 +3,7 @@ import recipeModel from '../models/recipeModel';
 import { QueryResultRecipe } from '../types/DbTypes';
 
 const getRecipes = async (req: Request, res: Response, next: NextFunction) => {
-  const ingredients = req.body.ingredients;
+  const { ingredients, exact } = req.body;
 
   if (!ingredients || !Array.isArray(ingredients))
     return next({ message: { err: 'No ingredients supplied' } });
@@ -79,7 +79,28 @@ const getAdditionalData = async (
   return next();
 };
 
+const getAllIngredients = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const ingredients = await recipeModel.queryAllIngredients();
+    if (ingredients === 'Failed')
+      return next({
+        message: { err: 'Error querying database for all ingredients' },
+      });
+    res.locals.allIngredients = ingredients.rows.map(e => e.name);
+    return next();
+  } catch (e) {
+    return next({
+      message: { err: 'Error querying database for all ingredients' },
+    });
+  }
+};
+
 export default {
   getRecipes,
   getAdditionalData,
+  getAllIngredients,
 };

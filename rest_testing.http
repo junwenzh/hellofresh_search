@@ -13,3 +13,7 @@ content-type: application/json
 {
     "ingredients": ["Creamy Chicken and Wild Rice Soup","Garlic Bread"]
 }
+
+###
+
+GET http://localhost:3000/dbapi/allingredients HTTP/1.1
