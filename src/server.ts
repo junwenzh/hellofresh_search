@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser';
 
 import getRecipesRoute from './routes/recipesRoute';
 import hellofreshRoute from './routes/hellofreshRoute';
+import loginRoute from './routes/loginRoute';
 
 const app = express();
 
@@ -21,6 +22,8 @@ app.use('/', express.static(path.join(__dirname, '../dist')));
 app.use('/dbapi', getRecipesRoute);
 
 app.use('/hfapi', hellofreshRoute);
+
+app.use('/login', loginRoute);
 
 app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
   const defaultErr = {

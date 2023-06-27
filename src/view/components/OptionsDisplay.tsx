@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAppSelector } from '../hooks';
 
-function DisplayOptions() {
+function OptionsDisplay() {
   const input = useAppSelector(state => state.inputText.text);
   const options = useAppSelector(state =>
     input
@@ -32,4 +32,4 @@ function DisplayOptions() {
   );
 }
 
-export default DisplayOptions;
+export default OptionsDisplay;

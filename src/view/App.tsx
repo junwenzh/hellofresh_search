@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import InputBox from './components/InputBox';
-import DisplayOptions from './components/OptionsDisplay';
+import OptionsDisplay from './components/OptionsDisplay';
 import { useAppDispatch } from './hooks';
 import { setAllIngredients } from './slices/allIngredientsSlice';
 
@@ -28,7 +28,7 @@ export default function App() {
       <form onSubmit={handleSubmit}>
         <InputBox />
 
-        <DisplayOptions />
+        <OptionsDisplay />
       </form>
     </>
   );

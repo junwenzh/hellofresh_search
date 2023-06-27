@@ -17,3 +17,22 @@ content-type: application/json
 ###
 
 GET http://localhost:3000/dbapi/allingredients HTTP/1.1
+
+###
+
+POST http://localhost:3000/login HTTP/1.1
+content-type: application/json
+
+{
+    "email": "noreply@juncafe.com"
+}
+
+###
+
+POST http://localhost:3000/login/authenticate HTTP/1.1
+content-type: application/json
+
+{
+    "code": "651713",
+    "email": "noreply@juncafe.com"
+}
