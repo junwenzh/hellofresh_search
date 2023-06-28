@@ -65,11 +65,14 @@ function InputBox() {
   }, [inputText]);
 
   return (
-    <input
-      value={inputText}
-      onChange={handleChange}
-      onKeyDown={handleArrowKeys}
-    />
+    <div className="text-center">
+      <input
+        value={inputText}
+        onChange={handleChange}
+        onKeyDown={handleArrowKeys}
+        className="px-4 py-2 text-lg w-72 md:w-96 border rounded-md shadow-sm text-center"
+      />
+    </div>
   );
 }
 

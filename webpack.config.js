@@ -23,7 +23,7 @@ module.exports = {
       },
       {
         test: /.s?[ac]ss$/,
-        use: ['style-loader', 'css-loader'],
+        use: ['style-loader', 'css-loader', 'postcss-loader'],
       },
     ],
   },
@@ -36,6 +36,7 @@ module.exports = {
     port: 8080,
     proxy: {
       '/dbapi': 'http://localhost:3000',
+      '/login': 'http://localhost:3000',
     },
   },
 };

@@ -3,9 +3,10 @@ import express, { NextFunction, Request, Response } from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 
-import getRecipesRoute from './routes/recipesRoute';
-import hellofreshRoute from './routes/hellofreshRoute';
-import loginRoute from './routes/loginRoute';
+import getRecipesRouter from './routes/recipesRoute';
+import hellofreshRouter from './routes/hellofreshRoute';
+import loginRouter from './routes/loginRoute';
+import authenticatedRouter from './routes/authenticatedRoute';
 
 const app = express();
 
@@ -13,17 +14,19 @@ app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 
-app.get('/', (req, res) =>
-  res.status(200).sendFile(path.join(__dirname, '../dist/index.html'))
-);
-
 app.use('/', express.static(path.join(__dirname, '../dist')));
 
-app.use('/dbapi', getRecipesRoute);
+// app.get('/', (_req, res) =>
+//   res.status(200).sendFile(path.join(__dirname, '../dist/index.html'))
+// );
 
-app.use('/hfapi', hellofreshRoute);
+app.use('/dbapi', getRecipesRouter);
 
-app.use('/login', loginRoute);
+app.use('/hfapi', hellofreshRouter);
+
+app.use('/login', loginRouter);
+
+app.use('/authenticated', authenticatedRouter);
 
 app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
   const defaultErr = {

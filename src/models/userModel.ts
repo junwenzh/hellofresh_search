@@ -27,24 +27,34 @@ const getUser = async (email: string) => {
   return await query(sql, [email]);
 };
 
-const createLoginToken = async (
-  email: string,
-  token: string,
-  expiration: Date
-) => {
-  const sql =
-    'insert into users (email, logintoken, loginexpire) values ($1, $2, $3)';
-  return await query(sql, [email, token, expiration]);
+const createLoginToken = async (email: string, token: string) => {
+  const sql = 'insert into users (email, token) values ($1, $2)';
+  return await query(sql, [email, token]);
 };
 
-const updateLoginToken = async (
-  email: string,
-  token: string,
-  expiration: Date
-) => {
-  const sql =
-    'update users set logintoken = $1, loginexpire = $2 where email = $3';
-  return await query(sql, [token, expiration, email]);
+const updateLoginToken = async (email: string, token: string) => {
+  const sql = 'update users set token = $1 where email = $2';
+  return await query(sql, [token, email]);
 };
 
-export { getUser, createLoginToken, updateLoginToken };
+const getUserIngredients = async (email: string) => {
+  const sql = 'select ingredient from user_ingredients where email = $1';
+  return await query(sql, [email]);
+};
+
+const updateUserIngredients = async (email: string, ingredients: string[]) => {
+  const deleteRecords = 'delete from user_ingredients where email = $1';
+  await query(deleteRecords, [email]);
+  const vals = ingredients.map(e => `('${email}','${e}')`).join(',');
+  const insertRecords =
+    'insert into user_ingredients (email, ingredient) values $1';
+  return await query(insertRecords, [vals]);
+};
+
+export {
+  getUser,
+  createLoginToken,
+  updateLoginToken,
+  getUserIngredients,
+  updateUserIngredients,
+};

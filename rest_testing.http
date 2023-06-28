@@ -36,3 +36,12 @@ content-type: application/json
     "code": "651713",
     "email": "noreply@juncafe.com"
 }
+
+###
+
+POST http://localhost:3000/session/create HTTP/1.1
+content-type: application/json
+
+{
+    "email": "noreply@juncafe.com"
+}

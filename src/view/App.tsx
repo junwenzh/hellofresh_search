@@ -1,8 +1,11 @@
 import React, { useEffect } from 'react';
-import InputBox from './components/InputBox';
-import OptionsDisplay from './components/OptionsDisplay';
+import { Routes, Route } from 'react-router-dom';
 import { useAppDispatch } from './hooks';
 import { setAllIngredients } from './slices/allIngredientsSlice';
+import Home from './components/Home';
+import Login from './components/Login';
+import NavBar from './components/NavBar';
+import Authenticate from './components/Authenticate';
 
 export default function App() {
   const dispatch = useAppDispatch();
@@ -13,23 +16,14 @@ export default function App() {
       .then(res => dispatch(setAllIngredients(res)));
   }, []);
 
-  const handleSubmit = (e: any) => {
-    e.preventDefault();
-    const selected = document.querySelector(
-      'input[name="inputIngredient"]:checked'
-    ) as HTMLInputElement;
-    if (!selected) return;
-    const selectedValue = selected.value;
-    alert(selectedValue);
-  };
-
   return (
-    <>
-      <form onSubmit={handleSubmit}>
-        <InputBox />
-
-        <OptionsDisplay />
-      </form>
-    </>
+    <div>
+      <NavBar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="login" element={<Login />} />
+        <Route path="authenticate" element={<Authenticate />} />
+      </Routes>
+    </div>
   );
 }

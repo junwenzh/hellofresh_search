@@ -1,23 +1,25 @@
-import jwt from 'jsonwebtoken';
 import { NextFunction, Request, Response } from 'express';
-import fs, { readFileSync } from 'fs';
+import jwt from 'jsonwebtoken';
 import aws from 'aws-sdk';
+import dotenv from 'dotenv';
 import {
   getUser,
   createLoginToken,
   updateLoginToken,
 } from '../models/userModel';
 
+dotenv.config();
+
 const config = {
   apiVersion: '2010-12-01',
-  region: 'us-east-1',
+  region: process.env.AWS_REGION,
 };
 
 aws.config.update(config);
 const ses = new aws.SES(config);
 
 const login = async (req: Request, res: Response, next: NextFunction) => {
-  const { email, sessionToken } = req.body;
+  const { email } = req.body;
 
   if (typeof email !== 'string' || email.match(/.+@.+\..+/) === null) {
     return next({ message: { err: 'Invalid email input' } });
@@ -31,27 +33,16 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
 
   const secret = getRandomInt(100000, 1000000);
 
-  const token = jwt.sign({ email }, secret, {
+  const token = jwt.sign({ email: email }, secret, {
     algorithm: 'HS256',
     expiresIn: 600,
   });
 
-  const expires = new Date(Date.now() + 1000 * 600);
-
   if (user.rowCount) {
-    if (sessionToken && user.rows[0].sessionexpire > Date.now()) {
-      try {
-        await jwt.verify(sessionToken, process.env.SESSION_SECRET!);
-        return next();
-      } catch (e) {
-        // continue
-      }
-    }
-    // update db with token
-    updateLoginToken(email, token, expires);
+    updateLoginToken(email, token);
   } else {
     // insert db with token
-    createLoginToken(email, token, expires);
+    createLoginToken(email, token);
   }
 
   try {
@@ -69,8 +60,8 @@ const authenticate = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { email, code } = req.body;
-  // const email = req.cookies.email;
+  const { code } = req.body;
+  const email = req.cookies.email;
 
   if (!code || !email) {
     return next({ message: { err: 'Missing email or code' } });
@@ -87,7 +78,10 @@ const authenticate = async (
   }
 
   try {
-    jwt.verify(user.rows[0].logintoken, code);
+    console.log(user);
+    console.log(code);
+    jwt.verify(user.rows[0].token, code);
+    res.locals.email = email;
     return next();
   } catch (e) {
     return next({ message: { err: 'invalid secret' } });
@@ -102,21 +96,21 @@ function getRandomInt(min: number, max: number) {
 
 function sendEmail(email: string, secret: string) {
   const params = {
-    Source: 'noreply@juncafe.com',
+    Source: process.env.AWS_FROM_EMAIL!,
     Destination: {
       ToAddresses: [email],
     },
     ReplyToAddresses: [],
     Message: {
+      Subject: {
+        Charset: 'UTF-8',
+        Data: `Your access code is ${secret}`,
+      },
       Body: {
         Html: {
           Charset: 'UTF-8',
           Data: secret,
         },
-      },
-      Subject: {
-        Charset: 'UTF-8',
-        Data: `Your access code is ${secret}`,
       },
     },
   };
