@@ -33,7 +33,7 @@ export default function Login() {
         />
         <button
           onClick={handleSubmit}
-          className="border rounded-md shadow-sm px-4 py-2"
+          className="border rounded-md shadow-sm px-4 py-2 hover:cursor-pointer"
         >
           Submit
         </button>

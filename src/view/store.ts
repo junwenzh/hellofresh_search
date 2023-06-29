@@ -3,6 +3,7 @@ import allIngredientsReducer from './slices/allIngredientsSlice';
 import currentIngredientsReducer from './slices/currentIngredientsSlice';
 import optionsReducer from './slices/optionsSlice';
 import inputReducer from './slices/inputSlice';
+import recipesReducer from './slices/recipesSlice';
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     currentIngredients: currentIngredientsReducer,
     options: optionsReducer,
     inputText: inputReducer,
+    receipes: recipesReducer,
   },
 });
 

@@ -95,8 +95,9 @@ const querySteps = async (id: string) => {
 
 const queryAllIngredients = async () => {
   const sql = `
-    select  distinct name
+    select  name, max(imagepath) imagepath
     from    ingredients
+    group by name
     order by name
   `;
   return query(sql, []);

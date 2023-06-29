@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useState, KeyboardEvent, useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '../hooks';
 import { setText } from '../slices/inputSlice';
+import { addIngredient } from '../slices/currentIngredientsSlice';
 
 function InputBox() {
   const [selectedOption, setSelectedOption] = useState(0);
@@ -17,6 +18,8 @@ function InputBox() {
     const options = document.querySelectorAll(
       'input[name="inputIngredient"]'
     ) as NodeListOf<HTMLInputElement>;
+
+    const selected = options[selectedOption]?.value;
 
     let newState;
 
@@ -35,15 +38,30 @@ function InputBox() {
         break;
       case 'Enter':
         e.preventDefault();
-        if (options.length > 1) {
+        if (inputText === selected) {
+          addItem();
+          dispatch(setText(''));
+        } else if (selected) {
           dispatch(setText(options[selectedOption].value));
           setSelectedOption(state => 0);
-        } else if (options.length === 1) {
         }
         break;
       default:
         return;
     }
+  };
+
+  const addItem = () => {
+    const selected = document.querySelector(
+      'input[name="inputIngredient"]'
+    ) as HTMLInputElement;
+    if (!selected) return;
+    dispatch(
+      addIngredient({
+        name: selected.value,
+        imagepath: selected.getAttribute('data-img')!,
+      })
+    );
   };
 
   useEffect(() => {
@@ -70,8 +88,16 @@ function InputBox() {
         value={inputText}
         onChange={handleChange}
         onKeyDown={handleArrowKeys}
+        placeholder="Start typing an ingredient"
         className="px-4 py-2 text-lg w-72 md:w-96 border rounded-md shadow-sm text-center"
       />
+      <button
+        id="btnAdd"
+        onClick={addItem}
+        className="mx-4 px-4 py-2 border rounded-md shadow-sm"
+      >
+        Add
+      </button>
     </div>
   );
 }

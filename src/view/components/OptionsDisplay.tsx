@@ -6,15 +6,13 @@ function OptionsDisplay() {
   const options = useAppSelector(state =>
     input
       ? state.allIngredients.ingredients
-          .filter(text =>
-            text.toLocaleLowerCase().includes(input.toLowerCase())
-          )
+          .filter(text => text.name.toLowerCase().includes(input.toLowerCase()))
           .sort((a, b) => {
-            if (a.toLowerCase() === input.toLowerCase()) return -1;
-            if (a < b) return -1;
+            if (a.name.toLowerCase() === input.toLowerCase()) return -1;
+            if (a.name < b.name) return -1;
             return 1;
           })
-          .slice(0, 5)
+          .slice(0, 10)
       : []
   );
 
@@ -22,19 +20,21 @@ function OptionsDisplay() {
     <fieldset className="text-center my-6">
       {options.map((e, index) => {
         return (
-          <div key={e} className="my-2">
+          <div key={e.name} className="my-2">
             <input
               type="radio"
-              id={e}
-              value={e}
+              id={`option_${e.name}`}
+              value={e.name}
               name="inputIngredient"
               className="hidden peer"
+              data-img={e.imagepath}
             />
+             
             <label
-              htmlFor={e}
+              htmlFor={`option_${e.name}`}
               className="block mx-auto peer-checked:bg-sky-200 px-4 py-2 rounded-md w-72 md:w-96"
             >
-              {e}
+              {e.name}
             </label>
           </div>
         );

@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
 
 export interface ingredientsState {
-  ingredients: string[];
+  ingredients: { name: string; imagepath: string }[];
 }
 
 const initialState: ingredientsState = {
@@ -13,7 +13,10 @@ export const allIngredientsSlice = createSlice({
   name: 'allingredients',
   initialState,
   reducers: {
-    setAllIngredients: (state, action: PayloadAction<string[]>) => {
+    setAllIngredients: (
+      state,
+      action: PayloadAction<{ name: string; imagepath: string }[]>
+    ) => {
       state.ingredients = action.payload;
     },
   },

@@ -4,7 +4,7 @@ import { QueryResultRecipe } from '../types/DbTypes';
 
 const getRecipes = async (req: Request, res: Response, next: NextFunction) => {
   const { ingredients, exact } = req.body;
-
+  console.log(req.body);
   if (!ingredients || !Array.isArray(ingredients))
     return next({ message: { err: 'No ingredients supplied' } });
 
@@ -19,7 +19,8 @@ const getRecipes = async (req: Request, res: Response, next: NextFunction) => {
   const sql = `
     select  r.id, r.name, r.websiteurl, r.imagepath, r.headline, r.description,
             r.category, r.difficulty, r.calories, r.preptime, r.totaltime,
-            r.favoritescount, r.averagerating
+            r.favoritescount, r.averagerating, 
+            row_number() over(partition by r.name order by r.favoritescount desc) as rn
     from    ingredients i
     join    recipe_ingredients ri on i.id = ri.ingredient_id
     join    recipes r on ri.recipe_id = r.id
@@ -90,7 +91,8 @@ const getAllIngredients = async (
       return next({
         message: { err: 'Error querying database for all ingredients' },
       });
-    res.locals.allIngredients = ingredients.rows.map(e => e.name);
+    res.locals.allIngredients = ingredients.rows;
+    // console.log(res.locals.allIngredients);
     return next();
   } catch (e) {
     return next({
