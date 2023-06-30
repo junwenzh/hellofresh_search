@@ -16,7 +16,7 @@ function OptionsDisplay() {
   );
 
   return (
-    <fieldset className="text-center my-6 z-10 absolute translate-x-1/2 bg-white">
+    <fieldset className="text-center my-6 z-10 absolute left-1/2 -translate-x-1/2 bg-white">
       {options.map((e, index) => {
         return (
           <div key={e.name} className="my-2">
