@@ -1,0 +1,6 @@
+{
+  "name": "login",
+  "dependencies": {
+    "jsonwebtoken": "^9.0.0"
+  }
+}

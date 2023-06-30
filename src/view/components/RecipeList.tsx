@@ -12,6 +12,7 @@ export default function RecipeList() {
       <Link to="/" className="my-4 text-2xl font-medium text-gray-600">
         Back to home
       </Link>
+      <p className="text-gray-700 my-8">Click on the card to expand</p>
       {recipes.map(recipe => (
         <div key={recipe.id}>
           <RecipeCard recipe={recipe} key={recipe.id} />
