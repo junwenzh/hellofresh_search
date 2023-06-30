@@ -24,22 +24,29 @@ function InputBox() {
     const options = document.querySelectorAll(
       'input[name="inputIngredient"]'
     ) as NodeListOf<HTMLInputElement>;
+    let index = 0;
+    for (let i = 0; i < options.length; i++) {
+      if (options[i].checked === true) {
+        index = i;
+        break;
+      }
+    }
 
-    const selected = options[selectedOption]?.value;
-    const imagepath = options[selectedOption]?.getAttribute('data-img');
+    const selected = options[index]?.value;
+    const imagepath = options[index]?.getAttribute('data-img');
 
     let newState;
 
     switch (e.code) {
       case 'ArrowUp':
         e.preventDefault();
-        newState = selectedOption - 1;
+        newState = index - 1;
         if (newState >= 0 && newState < options.length)
           setSelectedOption(newState);
         break;
       case 'ArrowDown':
         e.preventDefault();
-        newState = selectedOption + 1;
+        newState = index + 1;
         if (newState >= 0 && newState < options.length)
           setSelectedOption(newState);
         break;
@@ -47,12 +54,11 @@ function InputBox() {
         e.preventDefault();
         if (inputText === selected) {
           addItem();
-          dispatch(setText(''));
           if (authenticated) {
             insertRecord(selected, imagepath || '');
           }
         } else if (selected) {
-          dispatch(setText(options[selectedOption].value));
+          dispatch(setText(options[index].value));
           setSelectedOption(state => 0);
         }
         break;
@@ -63,11 +69,12 @@ function InputBox() {
 
   const addItem = () => {
     const selected = document.querySelector(
-      'input[name="inputIngredient"]'
+      'input[name="inputIngredient"]:checked'
     ) as HTMLInputElement;
     if (!selected) return;
     if (currentIngredients.filter(e => e.name === selected.value).length)
       return;
+    dispatch(setText(''));
     dispatch(
       addIngredient({
         name: selected.value,

@@ -4,7 +4,12 @@ import { Pool } from 'pg';
 dotenv.config();
 
 const pool = new Pool({
-  connectionString: process.env.PG_URI,
+  host: 'localhost',
+  port: 5432,
+  user: process.env.PG_USER,
+  password: process.env.PG_PASS,
+  database: 'users',
+  max: 10,
 });
 
 async function query(sql: string, params?: any[]) {

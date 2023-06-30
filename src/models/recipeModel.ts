@@ -13,7 +13,12 @@ import {
 dotenv.config();
 
 const pool = new Pool({
-  connectionString: process.env.PG_URI,
+  host: 'localhost',
+  port: 5432,
+  user: process.env.PG_USER,
+  password: process.env.PG_PASS,
+  database: 'hellofresh',
+  max: 10,
 });
 
 const rawSql = async (
