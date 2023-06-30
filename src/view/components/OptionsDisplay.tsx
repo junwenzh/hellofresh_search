@@ -7,10 +7,9 @@ function OptionsDisplay() {
     input
       ? state.allIngredients.ingredients
           .filter(text => text.name.toLowerCase().includes(input.toLowerCase()))
-          .sort((a, b) => {
+          .sort((a, _b) => {
             if (a.name.toLowerCase() === input.toLowerCase()) return -1;
-            if (a.name < b.name) return -1;
-            return 1;
+            return 0;
           })
           .slice(0, 10)
       : []

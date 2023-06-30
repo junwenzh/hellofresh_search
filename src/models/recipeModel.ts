@@ -95,10 +95,10 @@ const querySteps = async (id: string) => {
 
 const queryAllIngredients = async () => {
   const sql = `
-    select  name, max(imagepath) imagepath
+    select  name, max(imagepath) imagepath, sum(recipe_count) recipe_count
     from    ingredients
     group by name
-    order by name
+    order by recipe_count desc
   `;
   return query(sql, []);
 };

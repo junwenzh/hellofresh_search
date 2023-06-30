@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../hooks';
 import InputBox from './InputBox';
@@ -13,10 +13,14 @@ export default function Home() {
     state => state.currentIngredients.ingredients
   );
 
+  const [recipeFound, setRecipeFound] = useState(true);
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const handleSearch = () => {
+    if (!currentIngredients.length) return;
+
     const ingredientsArr = currentIngredients.map(e => e.name);
 
     fetch('/dbapi/findmatches', {
@@ -33,7 +37,12 @@ export default function Home() {
         dispatch(setRecipes(filtered));
         return navigate('/recipes');
       })
-      .catch(e => console.log(e));
+      .catch(() => {
+        setRecipeFound(false);
+        setTimeout(() => {
+          setRecipeFound(true);
+        }, 5000);
+      });
   };
 
   useEffect(() => {
@@ -59,6 +68,13 @@ export default function Home() {
 
   return (
     <main className="flex flex-col max-w-3xl mx-auto my-12 justify-center">
+      {recipeFound ? (
+        ''
+      ) : (
+        <div className="text-red-500 fixed mt-2 top-24 left-1/2 -translate-x-1/2">
+          No recipes found with the provided ingredients
+        </div>
+      )}
       <div className="text-center">
         <button
           onClick={handleSearch}

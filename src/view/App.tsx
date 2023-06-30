@@ -7,6 +7,7 @@ import Login from './components/Login';
 import NavBar from './components/NavBar';
 import Authenticate from './components/Authenticate';
 import RecipeList from './components/RecipeList';
+import Footer from './components/Footer';
 
 export default function App() {
   const dispatch = useAppDispatch();

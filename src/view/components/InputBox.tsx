@@ -9,9 +9,9 @@ function InputBox() {
   const authenticated = useAppSelector(
     state => state.authenticated.authenticated
   );
-  // const currentIngredients = useAppSelector(
-  //   state => state.currentIngredients.ingredients
-  // );
+  const currentIngredients = useAppSelector(
+    state => state.currentIngredients.ingredients
+  );
 
   const dispatch = useAppDispatch();
 
@@ -66,6 +66,8 @@ function InputBox() {
       'input[name="inputIngredient"]'
     ) as HTMLInputElement;
     if (!selected) return;
+    if (currentIngredients.filter(e => e.name === selected.value).length)
+      return;
     dispatch(
       addIngredient({
         name: selected.value,

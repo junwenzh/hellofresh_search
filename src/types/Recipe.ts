@@ -9,7 +9,12 @@ export interface Recipe {
   headline: string;
   id: string;
   imagepath: string;
-  ingredients: { name: string; imagepath: string }[];
+  ingredients: {
+    name: string;
+    imagepath: string;
+    amount: number;
+    unit: string;
+  }[];
   name: string;
   preptime: string;
   rn: string;
