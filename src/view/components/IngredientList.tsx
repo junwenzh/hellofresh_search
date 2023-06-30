@@ -10,7 +10,7 @@ export default function IngredientList() {
   );
 
   return (
-    <section>
+    <section className="absolute top-10 z-0 px-8 md:px-0">
       <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         {ingredients.map(e => {
           return (

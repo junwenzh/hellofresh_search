@@ -1,28 +1,15 @@
 import React, { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { useAppSelector, useAppDispatch } from './hooks';
+import { useAppDispatch } from './hooks';
 import { setAllIngredients } from './slices/allIngredientsSlice';
 import Home from './components/Home';
 import Login from './components/Login';
 import NavBar from './components/NavBar';
 import Authenticate from './components/Authenticate';
+import RecipeList from './components/RecipeList';
 
 export default function App() {
   const dispatch = useAppDispatch();
-
-  const currentIngredients = useAppSelector(
-    state => state.currentIngredients.ingredients
-  );
-
-  const allIngredients = useAppSelector(state =>
-    state.allIngredients.ingredients.slice(0, 5)
-  );
-
-  const recipes = useAppSelector(state => state.receipes);
-
-  const authenticated = useAppSelector(
-    state => state.authenticated.authenticated
-  );
 
   useEffect(() => {
     fetch('/dbapi/allingredients')
@@ -30,27 +17,15 @@ export default function App() {
       .then(res => dispatch(setAllIngredients(res)));
   }, []);
 
-  function showCurrentIngredients() {
-    // console.log('current', currentIngredients);
-    // console.log('all', allIngredients);
-    // console.log('recipes', recipes);
-    // console.log(document.cookie);
-    console.log(authenticated);
-  }
-
-  function getData() {
-    fetch('/authenticated').then(res => console.log(res));
-  }
-
   return (
-    <div>
+    <div className="bg-lime-50/15 min-h-screen">
       <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="login" element={<Login />} />
         <Route path="authenticate" element={<Authenticate />} />
+        <Route path="recipes" element={<RecipeList />} />
       </Routes>
-      <button onClick={showCurrentIngredients}>Show current state</button>
     </div>
   );
 }

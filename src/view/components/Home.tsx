@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../hooks';
 import InputBox from './InputBox';
 import OptionsDisplay from './OptionsDisplay';
@@ -8,15 +9,12 @@ import { setAuthenticated } from '../slices/authenticatedSlice';
 import { setCurrentIngredients } from '../slices/currentIngredientsSlice';
 
 export default function Home() {
-  const authenticated = useAppSelector(
-    state => state.authenticated.authenticated
-  );
-
   const currentIngredients = useAppSelector(
     state => state.currentIngredients.ingredients
   );
 
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const handleSearch = () => {
     const ingredientsArr = currentIngredients.map(e => e.name);
@@ -33,6 +31,7 @@ export default function Home() {
         if ('err' in res) throw new Error();
         const filtered = res.filter((e: any) => e.rn === '1');
         dispatch(setRecipes(filtered));
+        return navigate('/recipes');
       })
       .catch(e => console.log(e));
   };
@@ -69,8 +68,10 @@ export default function Home() {
         </button>
       </div>
       <InputBox />
-      <OptionsDisplay />
-      <IngredientList />
+      <div className="relative">
+        <OptionsDisplay />
+        <IngredientList />
+      </div>
     </main>
   );
 }

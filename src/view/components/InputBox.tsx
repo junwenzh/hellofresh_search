@@ -6,9 +6,9 @@ import { addIngredient } from '../slices/currentIngredientsSlice';
 function InputBox() {
   const [selectedOption, setSelectedOption] = useState(0);
   const inputText = useAppSelector(state => state.inputText.text);
-  // const authenticated = useAppSelector(
-  //   state => state.authenticated.authenticated
-  // );
+  const authenticated = useAppSelector(
+    state => state.authenticated.authenticated
+  );
   // const currentIngredients = useAppSelector(
   //   state => state.currentIngredients.ingredients
   // );
@@ -48,7 +48,9 @@ function InputBox() {
         if (inputText === selected) {
           addItem();
           dispatch(setText(''));
-          insertRecord(selected, imagepath || '');
+          if (authenticated) {
+            insertRecord(selected, imagepath || '');
+          }
         } else if (selected) {
           dispatch(setText(options[selectedOption].value));
           setSelectedOption(state => 0);
