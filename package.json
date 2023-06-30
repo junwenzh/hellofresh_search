@@ -2,11 +2,11 @@
   "name": "hellofresh-search",
   "version": "1.0.0",
   "description": "",
-  "main": "index.ts",
+  "main": "src/server.ts",
   "scripts": {
     "build": "NODE_ENV=production webpack",
     "webpack-dev": "NODE_ENV=development webpack serve --open",
-    "start-server": "nodemon src/server.ts"
+    "start": "nodemon src/server.ts"
   },
   "author": "",
   "license": "ISC",

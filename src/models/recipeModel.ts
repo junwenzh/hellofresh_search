@@ -1,3 +1,4 @@
+import dotenv from 'dotenv';
 import { Pool, QueryResult } from 'pg';
 import {
   DbRecipe,
@@ -9,13 +10,10 @@ import {
   DbRecipeTag,
 } from '../types/DbTypes';
 
+dotenv.config();
+
 const pool = new Pool({
-  host: 'localhost',
-  port: 5432,
-  user: process.env.PG_USER,
-  password: process.env.PG_PASS,
-  database: 'hellofresh',
-  max: 10,
+  connectionString: process.env.PG_URI,
 });
 
 const rawSql = async (
