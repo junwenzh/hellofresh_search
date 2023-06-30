@@ -1,10 +1,13 @@
 import React, { ChangeEvent, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '../hooks';
+import { setCurrentIngredients } from '../slices/currentIngredientsSlice';
 
 export default function Authenticate() {
   const [input, setInput] = useState('');
   const [status, setStatus] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -18,15 +21,25 @@ export default function Authenticate() {
         headers: {
           'Content-Type': 'application/json',
         },
+        credentials: 'include',
         body: JSON.stringify({ code: input }),
-      }).then(res => {
-        if (res.ok) {
-          navigate('/');
-        } else {
-          setInput('');
-          setStatus(true);
-        }
-      });
+      })
+        .then(res => {
+          if (res.status === 200) {
+            return res.json();
+          } else if (res.status === 201) {
+            return navigate('/');
+          } else {
+            setInput('');
+            setStatus(true);
+            return;
+          }
+        })
+        .then(res => {
+          console.log(res);
+          // dispatch(setCurrentIngredients(res));
+          return navigate('/');
+        });
     }
   }, [input]);
 

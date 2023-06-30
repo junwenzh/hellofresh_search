@@ -6,6 +6,12 @@ import { addIngredient } from '../slices/currentIngredientsSlice';
 function InputBox() {
   const [selectedOption, setSelectedOption] = useState(0);
   const inputText = useAppSelector(state => state.inputText.text);
+  // const authenticated = useAppSelector(
+  //   state => state.authenticated.authenticated
+  // );
+  // const currentIngredients = useAppSelector(
+  //   state => state.currentIngredients.ingredients
+  // );
 
   const dispatch = useAppDispatch();
 
@@ -20,6 +26,7 @@ function InputBox() {
     ) as NodeListOf<HTMLInputElement>;
 
     const selected = options[selectedOption]?.value;
+    const imagepath = options[selectedOption]?.getAttribute('data-img');
 
     let newState;
 
@@ -41,6 +48,7 @@ function InputBox() {
         if (inputText === selected) {
           addItem();
           dispatch(setText(''));
+          insertRecord(selected, imagepath || '');
         } else if (selected) {
           dispatch(setText(options[selectedOption].value));
           setSelectedOption(state => 0);
@@ -64,6 +72,16 @@ function InputBox() {
     );
   };
 
+  const insertRecord = (ingredient: string, imagepath: string) => {
+    fetch('/authenticated/insert', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ ingredient, imagepath }),
+    });
+  };
+
   useEffect(() => {
     const options = document.querySelectorAll(
       'input[name="inputIngredient"]'
@@ -71,16 +89,7 @@ function InputBox() {
 
     if (options.length === 0) return;
     options[selectedOption].checked = true;
-  }, [selectedOption]);
-
-  useEffect(() => {
-    const options = document.querySelectorAll(
-      'input[name="inputIngredient"]'
-    ) as NodeListOf<HTMLInputElement>;
-
-    if (options.length === 0) return;
-    options[0].checked = true;
-  }, [inputText]);
+  }, [selectedOption, inputText]);
 
   return (
     <div className="text-center">

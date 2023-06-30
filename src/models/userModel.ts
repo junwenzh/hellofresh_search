@@ -17,7 +17,7 @@ async function query(sql: string, params?: any[]) {
     return results;
   } catch (e) {
     client.release();
-    console.log(e);
+    console.log('Error running user model query');
     return 'Failed';
   }
 }
@@ -38,17 +38,23 @@ const updateLoginToken = async (email: string, token: string) => {
 };
 
 const getUserIngredients = async (email: string) => {
-  const sql = 'select ingredient from user_ingredients where email = $1';
+  const sql =
+    'select ingredient as name, imagepath from user_ingredients where email = $1';
   return await query(sql, [email]);
 };
 
-const updateUserIngredients = async (email: string, ingredients: string[]) => {
-  const deleteRecords = 'delete from user_ingredients where email = $1';
-  await query(deleteRecords, [email]);
-  const vals = ingredients.map(e => `('${email}','${e}')`).join(',');
-  const insertRecords =
-    'insert into user_ingredients (email, ingredient) values $1';
-  return await query(insertRecords, [vals]);
+const insertUserIngredient = async (
+  email: string,
+  ingredient: string,
+  imagepath: string
+) => {
+  const insertRecord = `insert into user_ingredients (email, ingredient, imagepath) values ($1, $2, $3)`;
+  return await query(insertRecord, [email, ingredient, imagepath]);
+};
+
+const deleteUserIngredient = async (email: string, ingredient: string) => {
+  const deleteRecord = `delete from user_ingredients where email = $1 and ingredient = $2`;
+  return await query(deleteRecord, [email, ingredient]);
 };
 
 export {
@@ -56,5 +62,6 @@ export {
   createLoginToken,
   updateLoginToken,
   getUserIngredients,
-  updateUserIngredients,
+  insertUserIngredient,
+  deleteUserIngredient,
 };

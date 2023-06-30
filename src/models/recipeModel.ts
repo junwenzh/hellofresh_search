@@ -111,7 +111,7 @@ async function query(sql: string, params: any[]) {
     return results;
   } catch (e) {
     client.release();
-    console.log(e);
+    console.log('Error running recipe model query');
     return 'Failed';
   }
 }

@@ -6,15 +6,20 @@ const router = Router();
 
 router.post(
   '/',
-  sessionController.validateSessionToken,
+  // sessionController.validateSessionToken,
   loginController.login,
   (_req, res) => {
-    res.end();
+    return res.end();
   }
 );
 
-router.post('/authenticate', loginController.authenticate, (_req, res) => {
-  res.end();
-});
+router.post(
+  '/authenticate',
+  loginController.authenticate,
+  sessionController.createSessionToken,
+  (_req, res) => {
+    res.send(201);
+  }
+);
 
 export default router;

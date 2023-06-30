@@ -45,3 +45,12 @@ content-type: application/json
 {
     "email": "noreply@juncafe.com"
 }
+
+###
+
+POST http://localhost:3000/authenticated/test HTTP/1.1
+content-type: application/json
+
+{
+    "email": "noreply@juncafe.com"
+}

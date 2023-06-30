@@ -20,6 +20,10 @@ export default function App() {
 
   const recipes = useAppSelector(state => state.receipes);
 
+  const authenticated = useAppSelector(
+    state => state.authenticated.authenticated
+  );
+
   useEffect(() => {
     fetch('/dbapi/allingredients')
       .then(res => res.json())
@@ -29,7 +33,13 @@ export default function App() {
   function showCurrentIngredients() {
     // console.log('current', currentIngredients);
     // console.log('all', allIngredients);
-    console.log('recipes', recipes);
+    // console.log('recipes', recipes);
+    // console.log(document.cookie);
+    console.log(authenticated);
+  }
+
+  function getData() {
+    fetch('/authenticated').then(res => console.log(res));
   }
 
   return (

@@ -37,6 +37,7 @@ module.exports = {
     proxy: {
       '/dbapi': 'http://localhost:3000',
       '/login': 'http://localhost:3000',
+      '/authenticated': 'http://localhost:3000',
     },
   },
 };

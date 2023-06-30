@@ -50,7 +50,7 @@ const login = async (req: Request, res: Response, next: NextFunction) => {
     res.cookie('email', email);
     return next();
   } catch (e) {
-    console.log(e);
+    console.log('Error sending email');
     return next({ message: { err: 'Error sending email' } });
   }
 };
@@ -78,8 +78,6 @@ const authenticate = async (
   }
 
   try {
-    console.log(user);
-    console.log(code);
     jwt.verify(user.rows[0].token, code);
     res.locals.email = email;
     return next();

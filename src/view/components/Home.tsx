@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '../hooks';
 import InputBox from './InputBox';
 import OptionsDisplay from './OptionsDisplay';
 import IngredientList from './IngredientList';
 import { setRecipes } from '../slices/recipesSlice';
+import { setAuthenticated } from '../slices/authenticatedSlice';
+import { setCurrentIngredients } from '../slices/currentIngredientsSlice';
 
 export default function Home() {
+  const authenticated = useAppSelector(
+    state => state.authenticated.authenticated
+  );
+
   const currentIngredients = useAppSelector(
     state => state.currentIngredients.ingredients
   );
@@ -30,6 +36,27 @@ export default function Home() {
       })
       .catch(e => console.log(e));
   };
+
+  useEffect(() => {
+    fetch('/authenticated')
+      .then(res => {
+        if (res.status === 200) {
+          return res.json();
+        } else {
+          throw new Error('Failed to authenticate');
+        }
+      })
+      .then(res => {
+        if (res) {
+          console.log('updated current ingredients', res);
+          dispatch(setAuthenticated(true));
+          dispatch(setCurrentIngredients(res));
+        }
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }, []);
 
   return (
     <main className="flex flex-col max-w-3xl mx-auto my-12 justify-center">

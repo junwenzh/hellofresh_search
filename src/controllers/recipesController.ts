@@ -4,7 +4,7 @@ import { QueryResultRecipe } from '../types/DbTypes';
 
 const getRecipes = async (req: Request, res: Response, next: NextFunction) => {
   const { ingredients, exact } = req.body;
-  console.log(req.body);
+
   if (!ingredients || !Array.isArray(ingredients))
     return next({ message: { err: 'No ingredients supplied' } });
 

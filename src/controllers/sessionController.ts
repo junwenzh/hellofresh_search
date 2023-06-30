@@ -13,11 +13,13 @@ const createSessionToken = async (
     process.env.SESSION_SECRET!,
     {
       algorithm: 'HS256',
-      expiresIn: 60 * 60 * 24 * 365,
+      expiresIn: 1000 * 60 * 60 * 24 * 365,
     }
   );
-
-  res.cookie('session', token);
+  res.cookie('session', token, {
+    maxAge: 1000 * 60 * 60 * 24 * 365,
+    // httpOnly: true,
+  });
   return next();
 };
 
@@ -30,10 +32,13 @@ const validateSessionToken = async (
     if (!req.cookies.session) throw new Error();
     await jwt.verify(req.cookies.session, process.env.SESSION_SECRET!);
     res.locals.email = parseJwt(req.cookies.session).email;
-    console.log(1);
+    console.log('successfully validated', res.locals.email);
     return next();
   } catch (e) {
-    return next();
+    return next({
+      status: 400,
+      message: { err: 'Invalid token. Please log in' },
+    });
   }
 };
 
