@@ -7,6 +7,7 @@ import IngredientList from './IngredientList';
 import { setRecipes } from '../slices/recipesSlice';
 import { setAuthenticated } from '../slices/authenticatedSlice';
 import { setCurrentIngredients } from '../slices/currentIngredientsSlice';
+import { setText } from '../slices/inputSlice';
 
 export default function Home() {
   const currentIngredients = useAppSelector(
@@ -35,6 +36,7 @@ export default function Home() {
         if ('err' in res) throw new Error();
         const filtered = res.filter((e: any) => e.rn === '1');
         dispatch(setRecipes(filtered));
+        dispatch(setText(''));
         return navigate('/recipes');
       })
       .catch(() => {

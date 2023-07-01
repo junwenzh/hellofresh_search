@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../hooks';
 import { setAuthenticated } from '../slices/authenticatedSlice';
+import { FaGithub } from 'react-icons/fa';
 
 function NavBar() {
   const authenticated = useAppSelector(
@@ -28,22 +29,31 @@ function NavBar() {
         >
           HelloFresh Recipes Search
         </Link>
-        {authenticated ? (
-          <Link
-            to="/"
-            className="text-xl font-bold text-gray-700 hover:cursor-pointer"
-            onClick={logout}
+        <div className="flex">
+          {authenticated ? (
+            <Link
+              to="/"
+              className="text-xl font-bold text-gray-700 hover:cursor-pointer"
+              onClick={logout}
+            >
+              Logout
+            </Link>
+          ) : (
+            <Link
+              to="login"
+              className="text-xl font-bold text-gray-700 hover:cursor-pointer"
+            >
+              Login
+            </Link>
+          )}
+          <a
+            href="https://github.com/junwenzh/hellofresh_search"
+            className="text-lg font-medium text-gray-700 hover:cursor-pointer flex items-center ml-4"
           >
-            Logout
-          </Link>
-        ) : (
-          <Link
-            to="login"
-            className="text-xl font-bold text-gray-700 hover:cursor-pointer"
-          >
-            Login
-          </Link>
-        )}
+            <FaGithub />
+            <span>Github</span>
+          </a>
+        </div>
       </nav>
     </div>
   );
