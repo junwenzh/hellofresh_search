@@ -4,9 +4,10 @@
   "description": "",
   "main": "src/server.ts",
   "scripts": {
-    "build": "NODE_ENV=production webpack",
+    "build": "NODE_ENV=production webpack && tsc --build",
     "webpack-dev": "NODE_ENV=development webpack serve --open",
-    "start": "nodemon src/server.ts"
+    "start-dev": "nodemon src/server.ts",
+    "start": "node dist/server.js"
   },
   "author": "",
   "license": "ISC",
