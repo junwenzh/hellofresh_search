@@ -23,7 +23,7 @@ export const currentIngredientsSlice = createSlice({
       state,
       action: PayloadAction<{ name: string; imagepath: string }>
     ) => {
-      state.ingredients.push(action.payload);
+      state.ingredients.unshift(action.payload);
     },
     removeIngredient: (
       state,
