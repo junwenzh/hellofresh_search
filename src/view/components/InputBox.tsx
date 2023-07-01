@@ -139,132 +139,134 @@ function InputBox() {
 export default InputBox;
 
 const samples = [
+  { name: 'Apple', imagepath: '/image/554a3a7cf8b25ed7288b456b.png' },
+  { name: 'Arugula', imagepath: '/image/554a2fc4fd2cb9cf488b4568.png' },
   {
-    name: 'Yukon Gold Potatoes',
-    imagepath: '/ingredient/554a3abff8b25e1d268b456d-bb4a9f50.png',
+    name: 'Bell Pepper',
+    imagepath: '/ingredients/596631bfc9fd08350247b2f2-aa0ce52c.png',
   },
   {
-    name: 'Sour Cream',
-    imagepath: '/ingredient/5550e1064dab71893e8b4569-dc52e70d.png',
-  },
-  { name: 'Shallot', imagepath: '/image/554a3dfbf8b25e1d268b456f.png' },
-  {
-    name: 'Sirloin Steak',
-    imagepath: '/ingredient/5550da9f4dab71e3118b456a-3cb74543.png',
+    name: 'Broccoli Florets',
+    imagepath: '/image/55b78d35f8b25ece088b4568.png',
   },
   {
-    name: 'Vegetable Oil',
-    imagepath: '/ingredients/5566d4f94dab715a078b4568-7c93a003.png',
+    name: 'Brussels Sprouts',
+    imagepath: '/image/5566e925f8b25eda298b4567.png',
   },
+  {
+    name: 'Button Mushrooms',
+    imagepath: '/ingredient/5566f746f8b25e242a8b4569-69a05fb6.png',
+  },
+  {
+    name: 'Cauliflower Rice',
+    imagepath: '/ingredient/61141ceb2d46d04d0953fc9b-57c082bd.png',
+  },
+  {
+    name: 'Cilantro',
+    imagepath: '/ingredient/554a3c4d4dab71716c8b456c-4339dd73.png',
+  },
+  {
+    name: 'Coconut Milk',
+    imagepath: '/ingredient/5d76cbf40dcef10011285174-c211b7cb.png',
+  },
+  {
+    name: 'Cremini Mushrooms',
+    imagepath: '/ingredient/5642260ffd2cb9dc3f8b4567-cd7f2fc3.png',
+  },
+  {
+    name: 'Crushed Tomatoes',
+    imagepath: '/ingredient/554a362efd2cb9324b8b456b-5a2c70f3.png',
+  },
+  {
+    name: 'Cucumber',
+    imagepath: '/ingredient/5550dbe9f8b25ed3468b456a-d2860748.png',
+  },
+  { name: 'Curry Powder', imagepath: '/image/55560f58fd2cb9891f8b4567.png' },
+  {
+    name: 'Feta Cheese',
+    imagepath: '/ingredient/5550e0374dab71893e8b4568-860b1f11.png',
+  },
+  {
+    name: 'Fig Jam',
+    imagepath: '/ingredient/55eee003f8b25e7f6e8b4567-dfc9be36.png',
+  },
+  {
+    name: 'Flatbreads',
+    imagepath: '/ingredient/638788c53cd92d975d026527-41e3a696.png',
+  },
+  { name: 'Ground Pork', imagepath: '/image/55661f8afd2cb9046d8b456a.png' },
+  {
+    name: 'Italian Cheese Blend',
+    imagepath: '/ingredient/55cca25af8b25e7b468b4567-ae6feec9.png',
+  },
+  {
+    name: 'Italian Chicken Sausage Mix',
+    imagepath: '/ingredient/595d109099052d17e837c322-626ae324.png',
+  },
+  { name: 'Jasmine Rice', imagepath: '/image/55b7845df8b25ed9088b4567.png' },
   { name: 'Kale', imagepath: '/image/5566ef2dfd2cb95e018b4568.png' },
-  {
-    name: 'Black Peppercorns',
-    imagepath: '/image/565dc2bf79a23ce1658b4567.png',
-  },
-  {
-    name: 'Beef Stock Concentrate',
-    imagepath: '/ingredient/563a4afbf8b25e1f3c8b4567-acbd70cb.png',
-  },
-  { name: 'Kosher Salt', imagepath: '/image/5566ceb7fd2cb95f7f8b4567.png' },
-  { name: 'Pepper', imagepath: '/image/5566dc00f8b25e5b298b4568.png' },
-  { name: 'Butter', imagepath: '/image/5566e4d74dab71e3078b4569.png' },
-  {
-    name: 'Balsamic Vinegar',
-    imagepath: '/image/554a3879fd2cb9ba4f8b456a.png',
-  },
-  { name: 'Kosher Salt', imagepath: '/image/5566ceb7fd2cb95f7f8b4567.png' },
-  { name: 'Mustard Seeds', imagepath: '/image/56b0c814f8b25e50078b4567.png' },
-  {
-    name: 'Yukon Gold Potatoes',
-    imagepath: '/ingredient/554a3abff8b25e1d268b456d-bb4a9f50.png',
-  },
-  {
-    name: 'Cranberry Jam',
-    imagepath: '/ingredients/58346dc7b32fbe179c589f71-1dcf659b.png',
-  },
-  {
-    name: 'White Wine Vinegar',
-    imagepath: '/image/5550dc7bfd2cb974658b456a.png',
-  },
-  { name: 'Yellow Onion', imagepath: '/image/554a35b7fd2cb9ba4f8b4568.png' },
-  {
-    name: 'Sirloin Steak',
-    imagepath: '/ingredient/5550da9f4dab71e3118b456a-3cb74543.png',
-  },
-  { name: 'Sugar', imagepath: '/image/5566e2014dab71e3078b4568.png' },
-  { name: 'Pepper', imagepath: '/image/5566dc00f8b25e5b298b4568.png' },
-  { name: 'Olive Oil', imagepath: '/image/5566cdf2f8b25e0d298b4568.png' },
-  { name: 'Rosemary', imagepath: '/image/55661a71f8b25e391e8b456a.png' },
-  { name: 'Soy Sauce', imagepath: '/image/5550dc4afd2cb9a7168b4568.png' },
-  {
-    name: 'Vegetable Oil',
-    imagepath: '/ingredients/5566d4f94dab715a078b4568-7c93a003.png',
-  },
-  {
-    name: 'Shredded Red Cabbage',
-    imagepath: '/ingredient/558474e9f8b25e53718b4567-b22e3393.png',
-  },
-  {
-    name: 'Dried Oregano',
-    imagepath: '/ingredient/5566de3b4dab715b078b456a-933a1536.png',
-  },
-  { name: 'Olive Oil', imagepath: '/image/5566cdf2f8b25e0d298b4568.png' },
-  { name: 'Kosher Salt', imagepath: '/image/5566ceb7fd2cb95f7f8b4567.png' },
-  { name: 'Pepper', imagepath: '/image/5566dc00f8b25e5b298b4568.png' },
-  {
-    name: 'Roma Tomato',
-    imagepath: '/ingredient/55539a474dab7106578b4569-a580bdf4.png',
-  },
-  {
-    name: 'Panko Breadcrumbs',
-    imagepath: '/ingredient/554a39a04dab71626c8b456b-ad74bb9c.png',
-  },
-  {
-    name: 'Mozzarella Cheese',
-    imagepath: '/image/57484aea4dab71ac228b4567.png',
-  },
-  { name: 'Chicken Breasts', imagepath: '/image/554a2efafd2cb9ce488b4567.png' },
-  {
-    name: 'Paprika',
-    imagepath: '/ingredient/5696c0824dab71d3408b4567-38d57946.png',
-  },
-  {
-    name: 'Yukon Gold Potatoes',
-    imagepath: '/ingredient/554a3abff8b25e1d268b456d-bb4a9f50.png',
-  },
-  {
-    name: 'Fresh Mozzarella',
-    imagepath: '/image/55672a724dab71a60d8b4568.png',
-  },
-  { name: 'Chicken Breasts', imagepath: '/image/554a2efafd2cb9ce488b4567.png' },
   { name: 'Lemon', imagepath: '/image/554a302ffd2cb9324b8b4569.png' },
-  { name: 'Orzo Pasta', imagepath: '/image/5566f47d4dab7124088b456b.png' },
-  { name: 'Parsley', imagepath: '/image/5553930af8b25e5e0c8b4569.png' },
   {
-    name: 'Roma Tomato',
-    imagepath: '/ingredient/55539a474dab7106578b4569-a580bdf4.png',
-  },
-  {
-    name: 'Zucchini',
-    imagepath: '/ingredient/5553981df8b25e5d0c8b456a-9ada5be3.png',
-  },
-  { name: 'Kosher Salt', imagepath: '/image/5566ceb7fd2cb95f7f8b4567.png' },
-  { name: 'Olive Oil', imagepath: '/image/5566cdf2f8b25e0d298b4568.png' },
-  { name: 'Pepper', imagepath: '/image/5566dc00f8b25e5b298b4568.png' },
-  {
-    name: 'Italian Seasoning',
-    imagepath: '/image/561554d5fd2cb97e5e8b4567.png',
-  },
-  {
-    name: 'Panko Breadcrumbs',
-    imagepath: '/ingredient/554a39a04dab71626c8b456b-ad74bb9c.png',
+    name: 'Lime',
+    imagepath: '/ingredient/554a3c9efd2cb9ba4f8b456c-f32287bd.png',
   },
   {
     name: 'Parmesan Cheese',
     imagepath: '/ingredient/5550e133fd2cb9a7168b456b-fb858db7.png',
   },
   {
-    name: 'Vegetable Oil',
-    imagepath: '/ingredients/5566d4f94dab715a078b4568-7c93a003.png',
+    name: 'Peanuts',
+    imagepath: '/ingredient/55cb71b679a23c5a378b4567-c414ebe0.png',
+  },
+  { name: 'Pecans', imagepath: '/image/5581ac5bf8b25e51498b456c.png' },
+  {
+    name: 'Pork Tenderloin',
+    imagepath: '/ingredient/5567235df8b25e472f8b4567-07475c37.png',
+  },
+  { name: 'Prosciutto', imagepath: '/image/55560e7b4dab71c5718b4567.png' },
+  {
+    name: 'Ramen Noodles',
+    imagepath: '/ingredient/56eaaedff8b25ea9538b4567-619383e2.png',
+  },
+  {
+    name: 'Red Cabbage & Carrot Mix',
+    imagepath: '/ingredient/6092d07a42b92c36740fa934-452d74d1.png',
+  },
+  { name: 'Ricotta Cheese', imagepath: '/image/556621dc4dab716f7d8b456c.png' },
+  { name: 'Rosemary', imagepath: '/image/55661a71f8b25e391e8b456a.png' },
+  {
+    name: 'Salted Caramel Mascarpone Cheesecake',
+    imagepath: '/ingredient/601af2717c6dff58b00e5f8d-9e552e55.png',
+  },
+  {
+    name: 'Shelled Edamame',
+    imagepath: '/ingredient/60240135e28c112717016a80-e8bc37dc.png',
+  },
+  {
+    name: 'Shredded Red Cabbage',
+    imagepath: '/ingredient/558474e9f8b25e53718b4567-b22e3393.png',
+  },
+  {
+    name: 'Sour Cream',
+    imagepath: '/ingredient/5550e1064dab71893e8b4569-dc52e70d.png',
+  },
+  { name: 'Spaghetti', imagepath: '/image/556714c84dab71d30c8b4568.png' },
+  { name: 'Sugar', imagepath: '/image/5566e2014dab71e3078b4568.png' },
+  { name: 'Sweet Potatoes', imagepath: '/image/554a392cf8b25e1c268b4569.png' },
+  {
+    name: 'Tempura Batter',
+    imagepath: '/ingredient/605b68588f34b72089545d98-bbbdd5f6.png',
+  },
+  {
+    name: 'Vanilla Delight Cheesecake',
+    imagepath: '/ingredient/5e8e1048975240298b795597-acf294e8.png',
+  },
+  {
+    name: 'White Chocolate Raspberry Swirl Cheesecake',
+    imagepath: '/ingredient/60ca46ce6fb7561f6911a6ac-01db6c0b.png',
+  },
+  {
+    name: 'Zucchini',
+    imagepath: '/ingredient/5553981df8b25e5d0c8b456a-9ada5be3.png',
   },
 ];
