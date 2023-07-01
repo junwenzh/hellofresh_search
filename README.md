@@ -1,5 +1,6 @@
 # Demo
 
+Note that saving user data doesn't work on the demo site.
 https://hellofresh-search.fly.dev
 
 # Problem
