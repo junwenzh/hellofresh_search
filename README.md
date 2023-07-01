@@ -1,8 +1,6 @@
 # Demo
 
-This demo page doesn't have login function.
-
-https://hellofresh-search.pages.dev
+https://hellofresh-search.fly.dev
 
 # Problem
 
