@@ -48,6 +48,11 @@ export default function Home() {
   };
 
   useEffect(() => {
+    const storedData = window.localStorage.getItem('ingredients');
+    if (storedData) {
+      dispatch(setCurrentIngredients(JSON.parse(storedData)));
+    }
+    // console.log(storedData);
     fetch('/authenticated')
       .then(res => {
         if (res.status === 200) {

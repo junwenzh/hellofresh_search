@@ -55,15 +55,20 @@ function InputBox() {
         break;
       case 'Enter':
         e.preventDefault();
-        if (inputText === selected) {
-          addItem();
-          if (authenticated) {
-            insertRecord(selected, imagepath || '');
-          }
-        } else if (selected) {
-          dispatch(setText(options[index].value));
-          setSelectedOption(state => 0);
-        }
+        addItem();
+        // if (inputText === selected) {
+        //   addItem();
+        //   if (authenticated) {
+        //     insertRecord(selected, imagepath || '');
+        //   }
+        //   window.localStorage.setItem(
+        //     'ingredients',
+        //     JSON.stringify(currentIngredients)
+        //   );
+        // } else if (selected) {
+        //   dispatch(setText(options[index].value));
+        //   setSelectedOption(state => 0);
+        // }
         break;
       default:
         return;
@@ -75,14 +80,35 @@ function InputBox() {
       'input[name="inputIngredient"]:checked'
     ) as HTMLInputElement;
     if (!selected) return;
-    if (currentIngredients.filter(e => e.name === selected.value).length)
+    if (inputText !== selected.value) {
+      dispatch(setText(selected.value));
+      setSelectedOption(0);
       return;
+    }
+    if (currentIngredients.filter(e => e.name === selected.value).length) {
+      return;
+    }
     dispatch(setText(''));
     dispatch(
       addIngredient({
         name: selected.value,
         imagepath: selected.getAttribute('data-img')!,
       })
+    );
+    if (authenticated) {
+      insertRecord(selected.value, selected.getAttribute('data-img') || '');
+    }
+    console.log(selected.value);
+    window.localStorage.setItem(
+      'ingredients',
+      JSON.stringify(
+        [
+          {
+            name: selected.value,
+            imagepath: selected.getAttribute('data-img'),
+          },
+        ].concat(currentIngredients)
+      )
     );
   };
 

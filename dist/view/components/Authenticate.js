@@ -55,13 +55,14 @@ function Authenticate() {
                 else {
                     setInput('');
                     setStatus(true);
-                    return;
+                    throw new Error('Failed to authenticate');
                 }
             })
                 .then(res => {
                 console.log(res);
                 return navigate('/');
-            });
+            })
+                .catch(e => console.log(e));
         }
     }, [input]);
     return (react_1.default.createElement("main", { className: "flex flex-col max-w-2xl mx-auto my-32 justify-center" },

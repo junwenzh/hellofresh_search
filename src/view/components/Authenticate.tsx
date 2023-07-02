@@ -32,14 +32,15 @@ export default function Authenticate() {
           } else {
             setInput('');
             setStatus(true);
-            return;
+            throw new Error('Failed to authenticate');
           }
         })
         .then(res => {
           console.log(res);
           // dispatch(setCurrentIngredients(res));
           return navigate('/');
-        });
+        })
+        .catch(e => console.log(e));
     }
   }, [input]);
 

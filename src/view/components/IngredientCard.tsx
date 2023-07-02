@@ -22,11 +22,11 @@ export default function IngredientCard({
   const removeIngredient = (e: React.MouseEvent) => {
     const target = e.target as HTMLDivElement;
     const ingredient = target.previousSibling as HTMLSpanElement;
-    dispatch(
-      setCurrentIngredients(
-        currentIngredients.filter(v => v.name !== ingredient.innerText)
-      )
+    const newIngredients = currentIngredients.filter(
+      v => v.name !== ingredient.innerText
     );
+    // console.log(newIngredients);
+    dispatch(setCurrentIngredients(newIngredients));
     if (authenticated) {
       fetch('/authenticated/delete', {
         method: 'POST',
@@ -36,6 +36,8 @@ export default function IngredientCard({
         body: JSON.stringify({ ingredient: ingredient.innerText }),
       });
     }
+    // console.log(currentIngredients, newIngredients);
+    window.localStorage.setItem('ingredients', JSON.stringify(newIngredients));
   };
 
   const prefix =
