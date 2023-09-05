@@ -25,7 +25,9 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    jwt.verify(user.rows[0].token, secret);
+    const token = user.rows[0].token;
+    jwt.verify(token, secret);
+    cookies().set("token", token);
     return NextResponse.json({ message: "Successfully authenticated" });
   } catch (e) {
     return NextResponse.json(
