@@ -5,7 +5,7 @@ const pool = new Pool({
   port: 5432,
   user: process.env.PG_USER,
   password: process.env.PG_PASS,
-  database: "users",
+  database: "hellofresh",
   max: 10,
 });
 

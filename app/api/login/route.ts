@@ -5,6 +5,11 @@ import { NextRequest, NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
 
 import sendEmail from "@/app/libs/send_email";
+import {
+  findUser,
+  insertLoginToken,
+  updateLoginToken,
+} from "@/app/database/UserModel";
 
 export async function POST(request: NextRequest) {
   const { email } = await request.json();
@@ -24,6 +29,14 @@ export async function POST(request: NextRequest) {
     algorithm: "HS256",
     expiresIn: 600,
   });
+
+  const user = await findUser(email);
+
+  if (user.rowCount) {
+    updateLoginToken(email, token);
+  } else {
+    insertLoginToken(email, token);
+  }
 
   try {
     await sendEmail(email, secret);
