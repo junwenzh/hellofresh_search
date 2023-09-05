@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import jwt from "jsonwebtoken";
 
-import { findUser } from "@/app/database/UserModel";
+import { findUser, getUserIngredients } from "@/app/database/UserModel";
 
 export async function POST(request: NextRequest) {
   const cookie = cookies().get("email");
@@ -28,7 +28,10 @@ export async function POST(request: NextRequest) {
     const token = user.rows[0].token;
     jwt.verify(token, secret);
     cookies().set("token", token);
-    return NextResponse.json({ message: "Successfully authenticated" });
+
+    const { rows } = await getUserIngredients(email);
+
+    return NextResponse.json(rows);
   } catch (e) {
     return NextResponse.json(
       { message: "Invalid access token" },
