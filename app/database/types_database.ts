@@ -1,7 +1,7 @@
 export type Results = {
   command: string;
   rowCount: number;
-  rows: any[];
+  rows: { [key: string]: any }[];
   fields: Field[];
   rowAsArray: boolean;
 };

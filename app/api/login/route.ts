@@ -3,6 +3,7 @@
 // if no, insert email with token
 import { NextRequest, NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
+import { cookies } from "next/headers";
 
 import sendEmail from "@/app/libs/send_email";
 import {
@@ -20,6 +21,8 @@ export async function POST(request: NextRequest) {
       { status: 400 }
     );
   }
+
+  cookies().set("email", email);
 
   const secret = Math.floor(
     Math.random() * (999999 - 100000) + 10000
