@@ -7,7 +7,9 @@ import { query } from "@/app/database/database";
 import { Results } from "@/app/database/types_database";
 
 export async function getAllIngredients() {
-  const sql = "select id, name, imagepath from ingredients";
+  const sql =
+    "select id, name, imagepath from (select id, name, imagepath, ROW_NUMBER()OVER(partition by name order by imagepath desc) as row_number from ingredients) t where t.row_number = 1";
+  // "select distinct on (name) name, imagepath from ingredients order by imagepath desc";
   return (await query(sql)) as Results;
 }
 
