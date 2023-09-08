@@ -1,9 +1,10 @@
-import "./globals.css";
-import type { Metadata } from "next";
+import Navbar from './components/navbar/Navbar';
+import './globals.css';
+import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Hellofresh Search",
-  description: "Search for Hellofresh Recipes",
+  title: 'Hellofresh Search',
+  description: 'Search for Hellofresh Recipes',
 };
 
 export default function RootLayout({
@@ -13,6 +14,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <Navbar />
       <body>{children}</body>
     </html>
   );
