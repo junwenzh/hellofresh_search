@@ -13,7 +13,8 @@ function IngredientCard({ name, imageUrl, }) {
     const removeIngredient = (e) => {
         const target = e.target;
         const ingredient = target.previousSibling;
-        dispatch((0, currentIngredientsSlice_1.setCurrentIngredients)(currentIngredients.filter(v => v.name !== ingredient.innerText)));
+        const newIngredients = currentIngredients.filter(v => v.name !== ingredient.innerText);
+        dispatch((0, currentIngredientsSlice_1.setCurrentIngredients)(newIngredients));
         if (authenticated) {
             fetch('/authenticated/delete', {
                 method: 'POST',
@@ -23,6 +24,7 @@ function IngredientCard({ name, imageUrl, }) {
                 body: JSON.stringify({ ingredient: ingredient.innerText }),
             });
         }
+        window.localStorage.setItem('ingredients', JSON.stringify(newIngredients));
     };
     const prefix = 'https://img.hellofresh.com/w_64,q_auto,f_auto,c_limit,fl_lossy/hellofresh_s3/';
     return (react_1.default.createElement("li", { key: `have${name}`, className: "list-none flex content-center items-center basis-0" },

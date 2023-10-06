@@ -69,6 +69,10 @@ function Home() {
         });
     };
     (0, react_1.useEffect)(() => {
+        const storedData = window.localStorage.getItem('ingredients');
+        if (storedData) {
+            dispatch((0, currentIngredientsSlice_1.setCurrentIngredients)(JSON.parse(storedData)));
+        }
         fetch('/authenticated')
             .then(res => {
             if (res.status === 200) {

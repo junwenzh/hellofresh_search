@@ -17,11 +17,11 @@ const dotenv_1 = __importDefault(require("dotenv"));
 const pg_1 = require("pg");
 dotenv_1.default.config();
 const pool = new pg_1.Pool({
-    host: 'localhost',
+    host: "localhost",
     port: 5432,
     user: process.env.PG_USER,
     password: process.env.PG_PASS,
-    database: 'users',
+    database: process.env.PG_DB,
     max: 10,
 });
 function query(sql, params) {
@@ -34,28 +34,28 @@ function query(sql, params) {
         }
         catch (e) {
             client.release();
-            console.log('Error running user model query');
-            return 'Failed';
+            console.log("Error running user model query");
+            return "Failed";
         }
     });
 }
 const getUser = (email) => __awaiter(void 0, void 0, void 0, function* () {
-    const sql = 'select * from users where email = $1';
+    const sql = "select * from users where email = $1";
     return yield query(sql, [email]);
 });
 exports.getUser = getUser;
 const createLoginToken = (email, token) => __awaiter(void 0, void 0, void 0, function* () {
-    const sql = 'insert into users (email, token) values ($1, $2)';
+    const sql = "insert into users (email, token) values ($1, $2)";
     return yield query(sql, [email, token]);
 });
 exports.createLoginToken = createLoginToken;
 const updateLoginToken = (email, token) => __awaiter(void 0, void 0, void 0, function* () {
-    const sql = 'update users set token = $1 where email = $2';
+    const sql = "update users set token = $1 where email = $2";
     return yield query(sql, [token, email]);
 });
 exports.updateLoginToken = updateLoginToken;
 const getUserIngredients = (email) => __awaiter(void 0, void 0, void 0, function* () {
-    const sql = 'select ingredient as name, imagepath from user_ingredients where email = $1';
+    const sql = "select ingredient as name, imagepath from user_ingredients where email = $1";
     return yield query(sql, [email]);
 });
 exports.getUserIngredients = getUserIngredients;
