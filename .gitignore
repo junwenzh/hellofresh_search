@@ -3,3 +3,4 @@ node_modules
 rest_testing.http
 src/controllers/hellofreshController.ts
 lambda
+docker
