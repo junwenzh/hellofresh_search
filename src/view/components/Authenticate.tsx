@@ -32,6 +32,7 @@ export default function Authenticate() {
           } else {
             setInput('');
             setStatus(true);
+            console.log(res);
             throw new Error('Failed to authenticate');
           }
         })

@@ -20,6 +20,12 @@ export default function Login() {
     }).finally(() => navigate('/authenticate'));
   };
 
+  const handleEnter = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      handleSubmit();
+    }
+  };
+
   return (
     <main className="flex flex-col max-w-2xl mx-auto my-32 justify-center">
       <p className="text-center text-lg">Enter your email address</p>
@@ -29,6 +35,7 @@ export default function Login() {
           id="email"
           value={input}
           onChange={handleChange}
+          onKeyDown={e => handleEnter}
           className="px-4 py-2 my-8 mx-4 border rounded-md shadow-sm"
         />
         <button

@@ -1,10 +1,10 @@
-import { NextFunction, Request, Response } from 'express';
-import jwt from 'jsonwebtoken';
 import aws from 'aws-sdk';
 import dotenv from 'dotenv';
+import { NextFunction, Request, Response } from 'express';
+import jwt from 'jsonwebtoken';
 import {
-  getUser,
   createLoginToken,
+  getUser,
   updateLoginToken,
 } from '../models/userModel';
 
@@ -78,7 +78,7 @@ const authenticate = async (
   }
 
   try {
-    jwt.verify(user.rows[0].token, code);
+    const x = jwt.verify(user.rows[0].token, code);
     res.locals.email = email;
     return next();
   } catch (e) {
